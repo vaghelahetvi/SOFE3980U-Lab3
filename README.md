@@ -150,7 +150,7 @@ In this section, the MySQL image will be deployed over the GKE cluster using YAM
    cd ~
    git clone https://github.com/GeorgeDaoud3/SOFE3980U-Lab3.git
    ```
-2. run the following command to deploy the MyAQL server 
+2. Run the following command to deploy the MySQL server 
    ```cmd 
    cd ~/SOFE3980U-Lab3/MySQL
    kubectl create -f mysql-deploy.yaml
@@ -167,7 +167,8 @@ In this section, the MySQL image will be deployed over the GKE cluster using YAM
    *	**Line 26**: defines the port number that will be used by the image.
       
       ![MS3 figure2](figures/cl3-2.jpg) 
-   
+
+   You can refer to the documentation of the **mysql/mysql-server** Docker image for the list of all supported enviroment variables (like thoss in lines 19:26) and their usage.
 3. The status of the deployment can be checked by the following command
    ```cmd 
    kubectl get deployment 
@@ -222,7 +223,7 @@ In this section, the MySQL image will be deployed over the GKE cluster using YAM
       kubectl delete -f mysql-service.yaml
       ```  
 ## Deploy Maven Project
-In this section, a previous version of the Maven project created at milestone 2 (BinaryCalculatorWebapp) will be converted into a Docker image. GKE will be used to Deploy it.
+In this section, We will create a new Docker image based on a previous version of the Maven project created at the second milestone, **BinaryCalculatorWebapp**. will be converted into a Docker image. GKE will be used to Deploy it.
 1. From the GCP console, change the current directory to the path **/BinaryCalculatorWebapp** at the cloned repository. Then, build the application to generate the WAR file. 
    ```cmd
    cd ~/SOFE3980U-Lab3/BinaryCalculatorWebapp
