@@ -131,7 +131,7 @@ As an example of Docker images, we will deploy a pre-existing MySQL image.
       It may take some time until the external IP address is changed from pending to a valid IP address. You may need to repeat the previous command.
       
       ![MS3 figure4](figures/cl3-4.jpg)      
-      
+
    3. Once you get a valid external IP address, you can use it to connect to the deployed MySQL server from any machine. For example, to connect to it from the GCP console, you can use the following command.
       ```cmd
       mysql -uuser -psofe3980u -h<IP-address> 
@@ -165,7 +165,7 @@ In this section, the MySQL image will be deployed over the GKE cluster using YAM
    *	**Lines 19-24**: define image-dependent environment variables that define username/password (**user/sofe3980u**), and a schema (**Readings**).
    *	**Line 26**: defines the port number that will be used by the image.
       
-      ![MS3 figure2](figures/cl3-2.jpg)      
+      ![MS3 figure2](figures/cl3-2.jpg) 
    
 3. The status of the deployment can be checked by the following command
    ```cmd 
@@ -185,7 +185,7 @@ In this section, the MySQL image will be deployed over the GKE cluster using YAM
       The important lines in the mysql-service.yaml file are:
       * **Line 8**: the port number that will be assigned to the external IP
       * **Line 10**:  the name of the application that will be targeted by the service.
-     
+      
          ![MS3 figure3](figures/cl3-3.jpg)      
    
    2. To check the status of the service, use this command 
@@ -193,10 +193,10 @@ In this section, the MySQL image will be deployed over the GKE cluster using YAM
       kubectl get service 
       ```
       ![MS3 figure4](figures/cl3-4.jpg)      
-   
+      
       It may take some time until the external IP address is changed from pending to a valid IP address. You may need to repeat the previous command.
 6. To access the MySQL server using the IP address,
-     1. From the GCP console ( or any other device in which MySQL client is installed), run the following commands. Before running the command, replace the **\<IP-address\>** with the external IP obtained in the previous step. The options -u, -p**, and **-h** are used to specify the **username**, **password**, and **host IP** of the deployed server, respectively. 
+   1. From the GCP console ( or any other device in which MySQL client is installed), run the following commands. Before running the command, replace the **\<IP-address\>** with the external IP obtained in the previous step. The options -u, -p**, and **-h** are used to specify the **username**, **password**, and **host IP** of the deployed server, respectively. 
       ```cmd
       mysql -uuser -psofe3980u -h<IP-address>
       ```
@@ -216,7 +216,7 @@ In this section, the MySQL image will be deployed over the GKE cluster using YAM
    
    4. To delete the deployment and the service, use the following command 
        ```cmd
-       cd ~/SOFE3980U-Lab3/MySQL
+      cd ~/SOFE3980U-Lab3/MySQL
       kubectl delete -f mysql-deploy.yaml
       kubectl delete -f mysql-service.yaml
       ```  
@@ -237,29 +237,34 @@ In this section, a previous version of the Maven project created at milestone 2 
       
 3. Get the Project ID,
 
-   ![Project-ID](figures/d2.jpg)
+      ![Project-ID](figures/d2.jpg)
       
 4. To create a docker image using **Dockerfile**, run the following command after replacing **\<Project-ID\>** with your project ID.
    ```cmd
    docker build -t gcr.io/<Project-ID>/binarycalculator .
    ```
+   
 5. To be able to use the image globally, it should be pushed into the Container registry.
    1. Search for **Container Registry**. then Enable it
    
       ![Dockerfile](figures/d3.jpg)         
+     
    2. Push the image to the **Google Container Registry**.
       ```cmd
       docker push gcr.io/<Project-ID>/binarycalculator
       ```
-7. To deploy the image using GKE
+      
+6. To deploy the image using GKE
    ```cmd
    kubectl create deployment binarycalculator-deployment --image gcr.io/<Project-ID\>/binarycalculator --port=8080 
    ```
-8. To assign an IP to the deployment
-      ```cmd
-      kubectl expose deployment binarycalculator-deployment --type=LoadBalancer --name=binarycalculator-service 
-      ```
-9. Get the IP associated with the service and access the application with that IP at port 8080.
+
+7. To assign an IP to the deployment
+   ```cmd
+   kubectl expose deployment binarycalculator-deployment --type=LoadBalancer --name=binarycalculator-service 
+   ```
+   
+8. Get the IP associated with the service and access the application with that IP at port 8080.
 
 ## Discussion:
 1. Briefly summarize what you have learned about docker and Kubernetes including the used terminologies and their descriptions. 
