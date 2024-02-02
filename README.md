@@ -73,53 +73,54 @@ As an example of Docker images, we will deploy a pre-existing MySQL image.
    ```cmd
    kubectl create deployment mysql-deployment --image mysql/mysql-server --port=3306 
    ```
-   where **mysql/mysql-server** is the name of the Docker image, **3306** is the port number that will be exposed from the docker image to the outside world, and **mysql-deployment** is the name that will be used by Kubernetes to access this deployment. By default, only one pod will be created per deployment. 
+   A deployment is orchestrating the docker applications. It would pull the **mysql/mysql-server** Docker image and deploy and enable the **3306** port number to allow access from the outside world. **mysql-deployment** is the name that Kubernetes will use to access this deployment. Only one pod (replica) will be created per deployment by default.
 2. The status of the deployment can be checked by the following command 
    ```cmd
-   kubectl get deployment 
+   kubectl get deployments 
    ```
 3. While the status of the pod can be accessed by the following command 
    ```cmd
    kubectl get pods 
    ```
-   check that the deployment is available and that the pod is running successfully (it may take some time until everything is settled down) 
+   Check that the deployment is available and that the pod is running successfully (it may take some time until everything is settled down) 
 4. To access the MySQL logs,  
-   1. According to the [image documentation](https://dev.mysql.com/doc/refman/8.0/en/linux-installation-docker.html), as we didn’t specify the root password, it will be generated randomly. To get that password, the logs generated locally by the pod should be accessed and filtered it for a certain line using the following command after replacing **\<pod-name\>** with the pod name obtained by the previous step.
+   1. According to the [image documentation] (https://dev.mysql.com/doc/refman/8.0/en/linux-installation-docker.html), as we didn't specify the root password, it will be generated randomly. To get that password, the logs generated locally by the pod should be accessed and searched for the line containing the randomly generated password. This can be achieved using the following command after replacing **\<pod-name\>** with the pod name obtained by the previous step.
       ```cmd
       kubectl logs <pod-name> |grep GENERATED 
       ```
-      Accessing the logs of a pod helps a lot in troubleshooting it in case of an error or a crash. 
+      Also, accessing the logs of a pod helps a lot in troubleshooting it in case of an error or a crash. 
    2. You  can  access  the  database  by  running  the  command  **mysql**  within  the  pod,  by  using  the following command 
       ``` cmd
       kubectl exec -it  <pod-name>  -- mysql -uroot -p 
       ```
-      Kubernetes exec command allows you to execute a certain command within a certain pod in interactive (-i option) and by using the Linux terminal (-t option). The command we want to execute is mysql which opens a CLI to the MySQL database. It has two options, the first is **-u** followed by the username, i.e. root. The second is **-p** which asks you to enter the root password you got in a). Note, there is no whitespace between the **-u** and **root**. 
-   3. The first step after successful login is to change the root password, using the following MySQL command. 
+      Kubernetes exec command allows you to execute a certain command within a certain pod in interactive (-i option) and by using the Linux terminal (-t option). The command we want to execute is mysql which opens a CLI to the MySQL database. It has two options, the first is **-u** followed by the username, i.e. root. The second is **-p** which asks you to enter the root password you got in a). Note, there is no whitespace between the **-u** and **root**.
+      **Note**: for security reasons, the password remains invisible while you type or paste it.
+   4. After successful login to the MySQL server, it's recommended to change the root password, using the following MySQL command (don't forget to replace **<new-password>** with a password of your choice). 
       ```sql
       ALTER USER 'root'@'localhost' IDENTIFIED BY '<new-password>' ; 
       ```
-   4. Then you can run any MySQL command, like 
+   5. Then you can run any MySQL command, like 
       ``` cmd
       show databases; 
       ```
       to display all available schemas.
-   5. To exit MySQL CLI, execute 
+   6. To exit MySQL CLI, execute 
       ```sql
       exit 
       ```
-   6. To login again to the CLI, we must use the new password and you can add it to the mysql command
+   7. To login again to the CLI, we must use the new password and you can add it to the mysql command
       ```cmd
       kubectl exec -it  <pod-name>  -- mysql -uroot -p<root-password> 
       ```
-      Again, there are no whitespaces between -p and the password 
-   7. To create a new user, use the following MySQL command 
+      Again, there are no whitespaces between -p and the password
+   8. To create a new user, called **user** with a password **sofe3980u** and give all permissions to the user, use the following MySQL command 
       ```cmd
       CREATE USER 'user'@'%' IDENTIFIED BY 'sofe3980u'; 
       GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION; 
       ```
-   8. Now exit the MySQL CLI, if you are already logged into it. 
+   9. Now exit the MySQL CLI, if you are already logged into it. 
 5. To give the deployment an IP address 
-   1. A load Balancer service should be created to that deployment 
+   1. A load Balancer service, **mysql-service**, should be created to that deployment. The load Balancer distributing the requests and workload between the replicas in the deployment (why this is not important in our case?) and associate an IP to the access the deployed application.
       ```cmd
       kubectl expose deployment mysql-deployment --type=LoadBalancer --name=mysql-service 
       ```
@@ -128,11 +129,11 @@ As an example of Docker images, we will deploy a pre-existing MySQL image.
       ``` cmd
       kubectl get service 
       ```
-      It may take some time until the external IP address is changed from pending to a valid IP address. You may need to repeat the previous command.
+      It may take some time until the external IP address is changed from pending to a valid IP address. You may need to repeat the previous command until the IP become available.
       
       ![MS3 figure4](figures/cl3-4.jpg)      
 
-   3. Once you get a valid external IP address, you can use it to connect to the deployed MySQL server from any machine. For example, to connect to it from the GCP console, you can use the following command.
+   3. Once you get a valid external IP address, you can use it to connect to the deployed MySQL server from any machine. For example, to connect to it from the GCP console, run the following command after replacing **<IP-address>** with the obtained IP.
       ```cmd
       mysql -uuser -psofe3980u -h<IP-address> 
       ```
