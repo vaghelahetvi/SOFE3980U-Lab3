@@ -58,7 +58,7 @@ To setup GKE, execute the following commands through the console within your Goo
    
       ![MS3 figure1](figures/cl3-1.jpg)
    
-   3. Wait until the API is enabled then, create a three-nodes cluster on GKE called **sofe3980u**. 
+   3. Wait until the API is enabled then, create a cluster on GKE called **sofe3980u**. The cluster contains three nodes. A Node is a worker machine in which docker images and applications can be deployed.
       ```cmd
       gcloud container clusters create sofe3980u --num-nodes=3 
       ```
