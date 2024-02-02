@@ -1,18 +1,21 @@
 # Milestone 3: Deploying using Google Kubernetes Engine
+
+After creating the web application, it has to be deployed. This web application will be containerized into a **Docker image**. Then, the container would be deployed over **Google Cloud Platform (GCP)** using a container orchestrating tool (**Kubernetes**).
+
 ## Objectives:
 1. Get Familiar with Docker and Kubernetes.
 2. Use Google Cloud Platform.
-3. Deploy Maven WebApp over Google Kubernetes Engine.
+3. Deploy Maven WebApp over Google Kubernetes Engine (GKE).
 
 ## Repository:
 [https://github.com/GeorgeDaoud3/SOFE3980U-Lab3.git](https://github.com/GeorgeDaoud3/SOFE3980U-Lab3.git)
 
 Docker, Kubernetes and GKE
 1.	Watch The following video to understand [Docker terminologies](https://youtu.be/rOTqprHv1YE).  
-2.	To manage Docker images and applications, we will use Kubernetes, watch the following video to get familiar with [Kubernetes and its components](https://youtu.be/cC46cg5FFAM).
+2.	To manage Docker images and applications, we will use Kubernetes, the following video explains [Kubernetes and its components](https://youtu.be/cC46cg5FFAM).
 
 ## Creating GCP account
-1.	It’s recommended to create a new Gmail account, but you can use an already existing account.
+1.	It’s recommended to create a new Gmail account, but you can use an already existing account (**don't use the university official email**).
 2.	Go to [GCP official site](https://cloud.google.com/gcp). Be sure that you are using the correct account. Then, click on **Get Started for free** button  
 
    ![a1](figures/a1.jpg)  
@@ -30,15 +33,17 @@ Docker, Kubernetes and GKE
    ![a4](figures/a4.jpg)  
 
 6.	Get yourself familiar with
-   * Dashboard: allows you to search and select available cloud services
-   * project(s): a project usually named **My First Project** will be created but we can create, edit, and delete projects.
-   * The console: By clicking the console icon, the console will be opened to you. The console is a Linux terminal that can be used to configure the cloud. Any commands that affect the console's local OS will be temporary and lost whenever the session is closed while any change made to any cloud services will be permanent.  
+   * **the Dashboard**: allows you to search and select available cloud services
+   * **project(s)**: a project usually named **My First Project** will be created by default. You can create, edit, and delete projects.
+   * **the console**: By clicking the console icon, the console will be opened to you. The console is a Linux terminal that can be used to configure the cloud. Any commands that affect the console's local OS will be temporary and lost whenever the session is closed while any change made to any cloud services will be permanent.
+     
       ![a5](figures/a5.jpg)  
-
-      The console will be opened at the bottom of the page as shown in the following figure and from it we can exchange files and folders with your local computer by downloading or uploading them. You can also click **Open Editor** button to open the editor.  
+      
+      The console will be opened at the bottom of the page as shown in the following figure and from it we can exchange files and folders with your local computer by downloading or uploading them. You can also click **Open Editor** button to open the editor.
+      
       ![a6](figures/a6.jpg)  
 
-   * Editor: It’s a text editor that allows you to edit plain text files as shown in the following figure. You can switch back to the console by clicking **Open Terminal** button  
+   * **the editor**: It’s a text editor that allows you to edit plain text files as shown in the following figure. You can switch back to the console by clicking **Open Terminal** button. 
 
       ![a7](figures/a7.jpg)  
       
