@@ -86,7 +86,7 @@ As an example of Docker images, we will deploy a pre-existing MySQL image.
 4. To access the MySQL logs,  
    1. According to the [image documentation](https://dev.mysql.com/doc/refman/8.0/en/linux-installation-docker.html), as we didn’t specify the root password, it will be generated randomly. To get that password, the logs generated locally by the pod should be accessed and filtered it for a certain line using the following command after replacing **\<pod-name\>** with the pod name obtained by the previous step.
       ```cmd
-      kubectl logs <pod-name> 2>&1 |grep GENERATED 
+      kubectl logs <pod-name> |grep GENERATED 
       ```
       Accessing the logs of a pod helps a lot in troubleshooting it in case of an error or a crash. 
    2. You  can  access  the  database  by  running  the  command  **mysql**  within  the  pod,  by  using  the following command 
