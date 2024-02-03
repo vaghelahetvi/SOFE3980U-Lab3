@@ -95,7 +95,7 @@ As an example of Docker images, we will deploy a pre-existing MySQL image.
       ```
       Kubernetes exec command allows you to execute a certain command within a certain pod in interactive (-i option) and by using the Linux terminal (-t option). The command we want to execute is mysql which opens a CLI to the MySQL database. It has two options, the first is **-u** followed by the username, i.e. root. The second is **-p** which asks you to enter the root password you got in a). Note, there is no whitespace between the **-u** and **root**.
       **Note**: for security reasons, the password remains invisible while you type or paste it.
-   4. After successful login to the MySQL server, it's recommended to change the root password, using the following MySQL command (don't forget to replace **<new-password>** with a password of your choice). 
+   4. After successful login to the MySQL server, it's recommended to change the root password, using the following MySQL command (don't forget to replace **\<new-password\>** with a password of your choice). 
       ```sql
       ALTER USER 'root'@'localhost' IDENTIFIED BY '<new-password>' ; 
       ```
@@ -133,7 +133,7 @@ As an example of Docker images, we will deploy a pre-existing MySQL image.
       
       ![MS3 figure4](figures/cl3-4.jpg)      
 
-   3. Once you get a valid external IP address, you can use it to connect to the deployed MySQL server from any machine. For example, to connect to it from the GCP console, run the following command after replacing **<IP-address>** with the obtained IP.
+   3. Once you get a valid external IP address, you can use it to connect to the deployed MySQL server from any machine. For example, to connect to it from the GCP console, run the following command after replacing **\<IP-address\>** with the obtained IP.
       ```cmd
       mysql -uuser -psofe3980u -h<IP-address> 
       ```
