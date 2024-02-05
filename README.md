@@ -237,9 +237,9 @@ In this section, We will create a new Docker image based on a previous version o
    
       ![Dockerfile](figures/d1.JPG)         
       
-3. the generated Docker image has to be stored globally. Thus, a Docker repo will be created in the GCP projet.
+3. the generated Docker image has to be stored globally. Thus, a Docker repo will be created in the GCP project.
    * Search for **Artifact Registry**
-   * In the **repositories** tab, press the **+** button to creata a new repo.
+   * In the **repositories** tab, press the **+** button to create a new repo.
    * Name it **sofe3980u** and make sure that the type is set to **Docker**. Set the region to "northamerica-northeast2 (Toronto)". Finally, press **create**.
    * open the **sofe3980u** repository and  copy the repo path.
 
