@@ -237,28 +237,25 @@ In this section, We will create a new Docker image based on a previous version o
    
       ![Dockerfile](figures/d1.JPG)         
       
-3. Get the Project ID,
+3. the generated Docker image has to be stored globally. Thus, a Docker repo will be created in the GCP projet.
+   * Search for **Artifact Registry**
+   * In the **repositories** tab, press the **+** button to creata a new repo.
+   * Name it **sofe3980u** and make sure that the type is set to **Docker**. Set the region to "northamerica-northeast2 (Toronto)". Finally, press **create**.
+   * open the **sofe3980u** repository and  copy the repo path.
 
-      ![Project-ID](figures/d2.jpg)
-      
-4. To create a docker image using **Dockerfile**, run the following command after replacing **\<Project-ID\>** with your project ID.
+4. To create a docker image using the **Dockerfile**, run the following command after replacing **\<repo-path\>** with the repo path you already copied in the previous step.
    ```cmd
-   docker build -t gcr.io/<Project-ID>/binarycalculator .
+   docker build -t <repo-path>/binarycalculator .
    ```
    
-5. To be able to use the image globally, it should be pushed into the Container registry.
-   1. Search for **Container Registry**. then Enable it
-   
-      ![Dockerfile](figures/d3.jpg)         
-     
-   2. Push the image to the **Google Container Registry**.
+5. To be able to use the image globally, it should be pushed into the **sofe3980u** repo in the **Artifact registry**.
       ```cmd
-      docker push gcr.io/<Project-ID>/binarycalculator
+      docker push <repo-path>/binarycalculator
       ```
       
 6. To deploy the image using GKE
    ```cmd
-   kubectl create deployment binarycalculator-deployment --image gcr.io/<Project-ID\>/binarycalculator --port=8080 
+   kubectl create deployment binarycalculator-deployment --image <repo-path>/binarycalculator --port=8080 
    ```
 
 7. To assign an IP to the deployment
