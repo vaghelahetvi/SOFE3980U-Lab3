@@ -73,7 +73,7 @@ As an example of Docker images, we will deploy a pre-existing MySQL image.
    ```cmd
    kubectl create deployment mysql-deployment --image mysql/mysql-server --port=3306 
    ```
-   A deployment is orchestrating the docker applications. It would pull the **mysql/mysql-server** Docker image and deploy and enable the **3306** port number to allow access from the outside world. **mysql-deployment** is the name that Kubernetes will use to access this deployment. Only one pod (replica) will be created per deployment by default.
+   Deployment's role is to orchestrate docker applications. It would pull the **mysql/mysql-server** Docker image and deploy and enable the **3306** port number to allow access from the outside world. **mysql-deployment** is the name that Kubernetes will use to access this deployment. Only one pod (replica) will be created per deployment by default.
 2. The status of the deployment can be checked by the following command 
    ```cmd
    kubectl get deployments 
