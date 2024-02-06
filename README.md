@@ -120,7 +120,7 @@ As an example of Docker images, we will deploy a pre-existing MySQL image.
       ```
    9. Now exit the MySQL CLI, if you are already logged into it. 
 5. To give the deployment an IP address 
-   1. A load Balancer service, **mysql-service**, should be created to that deployment. The load Balancer distributing the requests and workload between the replicas in the deployment (why this is not important in our case?) and associate an IP to the access the deployed application.
+   1. A load Balancer service, **mysql-service**, should be created to that deployment. The load Balancer distributes the requests and workload between the replicas in the deployment (why this is not important in our case?) and associates an IP to the access the deployed application.
       ```cmd
       kubectl expose deployment mysql-deployment --type=LoadBalancer --name=mysql-service 
       ```
