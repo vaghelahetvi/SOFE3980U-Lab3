@@ -229,7 +229,7 @@ In this section, We will create a new Docker image based on a previous version o
    cd ~/SOFE3980U-Lab3/BinaryCalculatorWebapp
    mvn package
    ```
-2. A new file is added with the name **Dockerfile** at the same path. It contains the steps necessary to create the docker image. the steps can be summarized as:
+2. The path also contains another file, **Dockerfile**. It contains the steps necessary to create the docker image. the steps can be summarized as:
    * line 1: starting with a base image.
    * line 2: create a volume **tmp** used by the TomCat server for temporary files.
    * line 3: copy the war file(s) from the path ./target at the host machine to the working directory at the docker image.
